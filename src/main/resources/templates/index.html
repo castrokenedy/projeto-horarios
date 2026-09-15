@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Início')}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<div class="container">
+    <div class="home-hero text-center mb-5">
+        <h1>Sistema de Gerenciamento de Horários</h1>
+        <p class="lead">Organize professores, disciplinas, turmas e horários de aula em um só lugar.</p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="card h-100 text-center p-3">
+                <h5>Professores</h5>
+                <p>Cadastro de docentes</p>
+                <a th:href="@{/professores}" class="btn btn-outline-dark">Acessar</a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card h-100 text-center p-3">
+                <h5>Disciplinas</h5>
+                <p>Cadastro de disciplinas</p>
+                <a th:href="@{/disciplinas}" class="btn btn-outline-dark">Acessar</a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card h-100 text-center p-3">
+                <h5>Turmas</h5>
+                <p>Cadastro de turmas</p>
+                <a th:href="@{/turmas}" class="btn btn-outline-dark">Acessar</a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card h-100 text-center p-3">
+                <h5>Horários</h5>
+                <p>Cadastro de horários de aula</p>
+                <a th:href="@{/horarios}" class="btn btn-outline-dark">Acessar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mt-2">
+        <div class="col-md-6">
+            <div class="card h-100 text-center p-3">
+                <h5>Visualizar por Professor</h5>
+                <p>Veja disciplinas, turmas e horários de um professor específico</p>
+                <a th:href="@{/horarios/por-professor}" class="btn btn-dark">Visualizar</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100 text-center p-3">
+                <h5>Visualizar por Turma</h5>
+                <p>Veja professores, disciplinas e horários de uma turma específica</p>
+                <a th:href="@{/horarios/por-turma}" class="btn btn-dark">Visualizar</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

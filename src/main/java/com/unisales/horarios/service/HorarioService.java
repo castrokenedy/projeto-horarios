@@ -33,4 +33,12 @@ public class HorarioService {
     public void deleteById(Long id) {
         horarioRepository.deleteById(id);
     }
+
+    public List<Horario> findByProfessor(Long professorId) {
+        return horarioRepository.findByProfessorIdOrderByDiaSemanaAscHoraInicioAsc(professorId);
+    }
+
+    public List<Horario> findByTurma(Long turmaId) {
+        return horarioRepository.findByTurmaIdOrderByDiaSemanaAscHoraInicioAsc(turmaId);
+    }
 }

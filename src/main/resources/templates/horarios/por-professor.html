@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Horários por Professor')}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<div class="container">
+    <h2>Horários por Professor</h2>
+
+    <form method="get" th:action="@{/horarios/por-professor}" class="row g-2 bg-white p-3 rounded mb-4">
+        <div class="col-md-8">
+            <select name="professorId" class="form-select">
+                <option value="">Selecione um professor...</option>
+                <option th:each="p : ${professores}"
+                        th:value="${p.id}"
+                        th:text="${p.nome}"
+                        th:selected="${professorSelecionado != null and professorSelecionado.id == p.id}"></option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-dark w-100">Consultar</button>
+        </div>
+    </form>
+
+    <div th:if="${professorSelecionado != null}">
+        <h4 th:text="'Professor: ' + ${professorSelecionado.nome}"></h4>
+        <table class="table table-striped bg-white">
+            <thead>
+            <tr>
+                <th>Disciplina</th>
+                <th>Turma</th>
+                <th>Dia</th>
+                <th>Início</th>
+                <th>Fim</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="horario : ${horarios}">
+                <td th:text="${horario.disciplina.nome}"></td>
+                <td th:text="${horario.turma.nome}"></td>
+                <td th:text="${horario.diaSemana.descricao}"></td>
+                <td th:text="${horario.horaInicio}"></td>
+                <td th:text="${horario.horaFim}"></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(horarios)}">
+                <td colspan="5" class="text-center text-muted">Este professor não possui horários cadastrados.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

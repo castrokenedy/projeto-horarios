@@ -77,4 +77,30 @@ public class HorarioController {
         model.addAttribute("turmas", turmaService.findAll());
         model.addAttribute("diasSemana", DiaSemana.values());
     }
+
+    // ---------- Visualizacao por professor ----------
+
+    @GetMapping("/horarios/por-professor")
+    public String porProfessor(@RequestParam(value = "professorId", required = false) Long professorId,
+                                Model model) {
+        model.addAttribute("professores", professorService.findAll());
+        if (professorId != null) {
+            model.addAttribute("professorSelecionado", professorService.findById(professorId));
+            model.addAttribute("horarios", horarioService.findByProfessor(professorId));
+        }
+        return "horarios/por-professor";
+    }
+
+    // ---------- Visualizacao por turma ----------
+
+    @GetMapping("/horarios/por-turma")
+    public String porTurma(@RequestParam(value = "turmaId", required = false) Long turmaId,
+                            Model model) {
+        model.addAttribute("turmas", turmaService.findAll());
+        if (turmaId != null) {
+            model.addAttribute("turmaSelecionada", turmaService.findById(turmaId));
+            model.addAttribute("horarios", horarioService.findByTurma(turmaId));
+        }
+        return "horarios/por-turma";
+    }
 }
