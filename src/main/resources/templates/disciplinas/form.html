@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Disciplina')}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<div class="container">
+    <h2 th:text="${disciplina.id} == null ? 'Nova Disciplina' : 'Editar Disciplina'"></h2>
+
+    <form th:action="@{/disciplinas/salvar}" th:object="${disciplina}" method="post" class="bg-white p-4 rounded">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input type="text" th:field="*{nome}" class="form-control">
+            <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Carga Horária (horas)</label>
+            <input type="number" th:field="*{cargaHoraria}" class="form-control">
+            <div class="text-danger" th:if="${#fields.hasErrors('cargaHoraria')}" th:errors="*{cargaHoraria}"></div>
+        </div>
+
+        <button type="submit" class="btn btn-dark">Salvar</button>
+        <a th:href="@{/disciplinas}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>

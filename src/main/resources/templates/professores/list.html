@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Professores')}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Professores</h2>
+        <a th:href="@{/professores/novo}" class="btn btn-dark">+ Novo Professor</a>
+    </div>
+
+    <table class="table table-striped bg-white">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="professor : ${professores}">
+            <td th:text="${professor.nome}"></td>
+            <td th:text="${professor.email}"></td>
+            <td th:text="${professor.telefone}"></td>
+            <td class="table-actions">
+                <a th:href="@{/professores/editar/{id}(id=${professor.id})}" class="btn btn-sm btn-outline-primary">Editar</a>
+                <a th:href="@{/professores/excluir/{id}(id=${professor.id})}"
+                   class="btn btn-sm btn-outline-danger"
+                   onclick="return confirm('Confirma a exclusão deste professor?');">Excluir</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(professores)}">
+            <td colspan="4" class="text-center text-muted">Nenhum professor cadastrado.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

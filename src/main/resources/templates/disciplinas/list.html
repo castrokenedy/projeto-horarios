@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Disciplinas')}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Disciplinas</h2>
+        <a th:href="@{/disciplinas/novo}" class="btn btn-dark">+ Nova Disciplina</a>
+    </div>
+
+    <table class="table table-striped bg-white">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Carga Horária (h)</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="disciplina : ${disciplinas}">
+            <td th:text="${disciplina.nome}"></td>
+            <td th:text="${disciplina.cargaHoraria}"></td>
+            <td class="table-actions">
+                <a th:href="@{/disciplinas/editar/{id}(id=${disciplina.id})}" class="btn btn-sm btn-outline-primary">Editar</a>
+                <a th:href="@{/disciplinas/excluir/{id}(id=${disciplina.id})}"
+                   class="btn btn-sm btn-outline-danger"
+                   onclick="return confirm('Confirma a exclusão desta disciplina?');">Excluir</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(disciplinas)}">
+            <td colspan="3" class="text-center text-muted">Nenhuma disciplina cadastrada.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
