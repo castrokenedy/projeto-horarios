@@ -3,9 +3,7 @@
 Projeto da disciplina de **Back End** — ADS/UniSales. Sistema web em **Java + Spring Boot + Thymeleaf** para gestão de Professores, Disciplinas, Turmas e Horários.
 
 ## Equipe
-- Kenedy
-- Ketleen
-- Arthur
+- Kenedy Anderson Souza de Castro
 
 ## Stack
 - Java 17
