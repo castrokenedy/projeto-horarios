@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Turma')}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<div class="container">
+    <h2 th:text="${turma.id} == null ? 'Nova Turma' : 'Editar Turma'"></h2>
+
+    <form th:action="@{/turmas/salvar}" th:object="${turma}" method="post" class="bg-white p-4 rounded">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="mb-3">
+            <label class="form-label">Nome da Turma</label>
+            <input type="text" th:field="*{nome}" class="form-control" placeholder="Ex: ADS-3B">
+            <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Turno</label>
+            <select th:field="*{turno}" class="form-select">
+                <option value="">Selecione...</option>
+                <option value="Manhã">Manhã</option>
+                <option value="Tarde">Tarde</option>
+                <option value="Noite">Noite</option>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('turno')}" th:errors="*{turno}"></div>
+        </div>
+
+        <button type="submit" class="btn btn-dark">Salvar</button>
+        <a th:href="@{/turmas}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>

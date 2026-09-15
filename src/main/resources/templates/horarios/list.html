@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Horários')}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Horários</h2>
+        <a th:href="@{/horarios/novo}" class="btn btn-dark">+ Novo Horário</a>
+    </div>
+
+    <table class="table table-striped bg-white">
+        <thead>
+        <tr>
+            <th>Professor</th>
+            <th>Disciplina</th>
+            <th>Turma</th>
+            <th>Dia</th>
+            <th>Início</th>
+            <th>Fim</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="horario : ${horarios}">
+            <td th:text="${horario.professor.nome}"></td>
+            <td th:text="${horario.disciplina.nome}"></td>
+            <td th:text="${horario.turma.nome}"></td>
+            <td th:text="${horario.diaSemana.descricao}"></td>
+            <td th:text="${horario.horaInicio}"></td>
+            <td th:text="${horario.horaFim}"></td>
+            <td class="table-actions">
+                <a th:href="@{/horarios/editar/{id}(id=${horario.id})}" class="btn btn-sm btn-outline-primary">Editar</a>
+                <a th:href="@{/horarios/excluir/{id}(id=${horario.id})}"
+                   class="btn btn-sm btn-outline-danger"
+                   onclick="return confirm('Confirma a exclusão deste horário?');">Excluir</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(horarios)}">
+            <td colspan="7" class="text-center text-muted">Nenhum horário cadastrado.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

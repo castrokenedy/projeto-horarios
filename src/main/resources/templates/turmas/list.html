@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Turmas')}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Turmas</h2>
+        <a th:href="@{/turmas/novo}" class="btn btn-dark">+ Nova Turma</a>
+    </div>
+
+    <table class="table table-striped bg-white">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Turno</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="turma : ${turmas}">
+            <td th:text="${turma.nome}"></td>
+            <td th:text="${turma.turno}"></td>
+            <td class="table-actions">
+                <a th:href="@{/turmas/editar/{id}(id=${turma.id})}" class="btn btn-sm btn-outline-primary">Editar</a>
+                <a th:href="@{/turmas/excluir/{id}(id=${turma.id})}"
+                   class="btn btn-sm btn-outline-danger"
+                   onclick="return confirm('Confirma a exclusão desta turma?');">Excluir</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(turmas)}">
+            <td colspan="3" class="text-center text-muted">Nenhuma turma cadastrada.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Horário')}"></head>
+<body>
+<nav th:replace="~{layout :: nav}"></nav>
+<div class="container">
+    <h2 th:text="${horario.id} == null ? 'Novo Horário' : 'Editar Horário'"></h2>
+
+    <form th:action="@{/horarios/salvar}" th:object="${horario}" method="post" class="bg-white p-4 rounded">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="mb-3">
+            <label class="form-label">Professor</label>
+            <select th:field="*{professor}" class="form-select">
+                <option value="">Selecione...</option>
+                <option th:each="p : ${professores}" th:value="${p.id}" th:text="${p.nome}"></option>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('professor')}" th:errors="*{professor}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Disciplina</label>
+            <select th:field="*{disciplina}" class="form-select">
+                <option value="">Selecione...</option>
+                <option th:each="d : ${disciplinas}" th:value="${d.id}" th:text="${d.nome}"></option>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('disciplina')}" th:errors="*{disciplina}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Turma</label>
+            <select th:field="*{turma}" class="form-select">
+                <option value="">Selecione...</option>
+                <option th:each="t : ${turmas}" th:value="${t.id}" th:text="${t.nome}"></option>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('turma')}" th:errors="*{turma}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Dia da Semana</label>
+            <select th:field="*{diaSemana}" class="form-select">
+                <option value="">Selecione...</option>
+                <option th:each="dia : ${diasSemana}" th:value="${dia}" th:text="${dia.descricao}"></option>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('diaSemana')}" th:errors="*{diaSemana}"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Hora de Início</label>
+                <input type="time" th:field="*{horaInicio}" class="form-control">
+                <div class="text-danger" th:if="${#fields.hasErrors('horaInicio')}" th:errors="*{horaInicio}"></div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Hora de Término</label>
+                <input type="time" th:field="*{horaFim}" class="form-control">
+                <div class="text-danger" th:if="${#fields.hasErrors('horaFim')}" th:errors="*{horaFim}"></div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-dark">Salvar</button>
+        <a th:href="@{/horarios}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>
